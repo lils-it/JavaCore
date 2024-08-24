@@ -8,12 +8,7 @@ public class BraceChecker {
         this.text = text;
     }
     void print() {
-        System.out.print("Text: ");
-        for (int i = 0; i < text.length() ; i++) {
-            char character = text.charAt(i);
-            System.out.print(character);
-        }
-        System.out.println();
+        System.out.println("Text: " + text);
     }
 
     public void check () {
