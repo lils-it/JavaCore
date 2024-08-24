@@ -29,5 +29,7 @@ public class BraceCheckerDemo {
         braceCheckerUser.print();
         braceCheckerUser.check();
 
+        scanner.close();
+
     }
 }
