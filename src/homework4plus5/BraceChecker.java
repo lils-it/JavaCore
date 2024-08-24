@@ -8,16 +8,16 @@ public class BraceChecker {
         this.text = text;
     }
 
-    void print() {
+    public void check() {
+
         System.out.println("Text: " + text);
-    }
 
-    public void check () {
+        StackChar stChar = new StackChar();
 
-       StackChar stChar = new StackChar();
+        for (int i = 0; i < text.length(); i++) {
 
-        for (int i = 0; i < text.length() ; i++) {
             char actualC = text.charAt(i);
+
             if (actualC == '[' || actualC == '{' || actualC == '(') {
                 stChar.push(new Brace(actualC, i));
                 continue;
@@ -28,37 +28,35 @@ public class BraceChecker {
                     continue;
                 }
 
+            Brace lastCheck;
 
-                    Brace lastCheck;
-
-                    switch (actualC) {
-                        case ']':
-                            lastCheck = stChar.pop();
-                            if (lastCheck.brace != '[') {
-                                System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
-                            }
-                            break;
-                        case '}':
-                            lastCheck = stChar.pop();
-                            if (lastCheck.brace != '{') {
-                                System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
-                            }
-                            break;
-                        case ')':
-                            lastCheck = stChar.pop();
-                            if (lastCheck.brace != '(') {
-                                System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
-                            }
-                            break;
-                    }
-
+            switch (actualC) {
+                  case ']':
+                      lastCheck = stChar.pop();
+                      if (lastCheck.brace != '[') {
+                          System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
+                      }
+                      break;
+                  case '}':
+                      lastCheck = stChar.pop();
+                      if (lastCheck.brace != '{') {
+                          System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
+                      }
+                      break;
+                  case ')':
+                      lastCheck = stChar.pop();
+                      if (lastCheck.brace != '(') {
+                          System.out.println("Error: opened " + lastCheck + " but closed " + actualC + " at index " + i);
+                      }
+                       break;
+            }
             }
         }
 
-        while (!stChar.stackIsEmpty()) {
-            Brace unclosedC =  stChar.pop();
+         while (!stChar.stackIsEmpty()) {
+            Brace unclosedC = stChar.pop();
             int unclosedIndex = unclosedC.index;
-            System.out.println("Error: opened " + unclosedC + " but did not close at index " + unclosedIndex );
+            System.out.println("Error: opened " + unclosedC + " but did not close at index " + unclosedIndex);
         }
         System.out.println();
     }

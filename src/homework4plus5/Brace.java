@@ -5,7 +5,6 @@ public class Brace {
     char brace;
     int index;
 
-
     public  Brace (char brace, int index) {
         this.brace = brace;
         this.index = index;
