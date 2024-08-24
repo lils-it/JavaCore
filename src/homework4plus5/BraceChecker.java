@@ -7,6 +7,7 @@ public class BraceChecker {
     public BraceChecker(String text) {
         this.text = text;
     }
+
     void print() {
         System.out.println("Text: " + text);
     }
