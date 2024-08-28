@@ -27,6 +27,7 @@ public class BookStorage {
             System.out.println(books[i]);
         }
     }
+
     public void searchByBookName(String keyword) {
         for (int i = 0; i < size; i++) {
             if (books[i].getTitle().toUpperCase().contains(keyword.toUpperCase())) {

@@ -39,8 +39,8 @@ public class Library {
                 case  "2":
                     bookStorage.print();
                     break;
-                case "3":
-                    if (! bookStorage.isEmpty()){
+                case  "3":
+                    if ( !bookStorage.isEmpty()){
                         System.out.println("Please input book keyword");
                         String keyword = scanner.nextLine();
                         bookStorage.searchByBookName(keyword);
