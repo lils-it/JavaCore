@@ -1,4 +1,4 @@
-package homewrok5;
+package homework5;
 
 public class StackChar {
 

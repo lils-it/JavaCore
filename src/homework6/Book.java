@@ -18,10 +18,11 @@ public class Book {
         this.id = id;
         this.authorName = authorName;
         this.price = price;
-
+        quantity++;
     }
 
     public Book() {
+        quantity++;
     }
 
     public String getTitle() {
