@@ -1,11 +1,11 @@
 package homework7.employee;
 
+
 import java.util.Arrays;
 
 public class EmployeeStorage {
 
     private Employee[] employees = new Employee[10];
-    private Employee[] employeesSearchPool;
     private int size;
 
     public boolean isEmpty () {
@@ -38,13 +38,25 @@ public class EmployeeStorage {
         }
     }
 
-    public Employee getEmployeeByCompanyName(String keyword) {
+    public Employee [] getEmployeesByCompanyName(String keyword) {
+        int count = 0;
 
         for (int i = 0; i < size; i++) {
             if (employees[i].getCompanyName().toUpperCase().contains(keyword.toUpperCase())) {
-               return employees[i];
+                count++;
             }
         }
-        return null;
+        if (count == 0) {
+            return new Employee[0]; //empty employee
+        }
+        Employee[] searchedEmployees = new Employee[count];
+
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getCompanyName().toUpperCase().contains(keyword.toUpperCase())) {
+                searchedEmployees[index++] = employees[i];
+            }
+        }
+        return searchedEmployees;
     }
 }

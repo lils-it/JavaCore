@@ -1,5 +1,6 @@
 package homework7.employee;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class EmployeeDemo implements EmployeeCommands{
@@ -63,10 +64,14 @@ public class EmployeeDemo implements EmployeeCommands{
             System.out.println("No employees in the storage! ");
             return;
         }
-        Employee employeeSearched = employeeStorage.getEmployeeByCompanyName(keyword);
-        if (employeeSearched == null) {
+        Employee [] employeesSearched = employeeStorage.getEmployeesByCompanyName(keyword);
+        if (employeesSearched.length == 0) {
             System.out.println("No company name with keyword " + keyword + " was found! ");
-        } else System.out.println(employeeSearched);
+        } else {
+            for (Employee employee : employeesSearched) {
+                System.out.println(employee);
+            }
+        }
     }
 
     private static void addNewEmployee() {
@@ -104,4 +109,5 @@ public class EmployeeDemo implements EmployeeCommands{
         System.out.println("Please input "+ SEARCH_EMPLOYEE_BY_EMPLOYEE_ID +  " to search an employee by ID");
         System.out.println("Please input "+ SEARCH_EMPLOYEE_BY_EMPLOYEE_COMPANYNAME +  " to search an employee by Company name");
     }
+
 }
