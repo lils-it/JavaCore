@@ -9,20 +9,20 @@ public class Book {
     private String authorName;
     private double price;
 
-    private static int quantity;
+    private int quantity;
 
 
 
-    public Book(String title, String id, String authorName, double price) {
+    public Book(String title, String id, String authorName, double price, int quantity) {
         this.title = title;
         this.id = id;
         this.authorName = authorName;
         this.price = price;
-        quantity++;
+        this.quantity = quantity;
     }
 
     public Book() {
-        quantity++;
+
     }
 
     public String getTitle() {
@@ -70,12 +70,12 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Double.compare(price, book.price) == 0 && Objects.equals(title, book.title) && Objects.equals(id, book.id) && Objects.equals(authorName, book.authorName);
+        return Double.compare(price, book.price) == 0 && quantity == book.quantity && Objects.equals(title, book.title) && Objects.equals(id, book.id) && Objects.equals(authorName, book.authorName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, id, authorName, price);
+        return Objects.hash(title, id, authorName, price, quantity);
     }
 
     @Override
@@ -84,7 +84,8 @@ public class Book {
                 "title='" + title + '\'' +
                 ", id='" + id + '\'' +
                 ", authorName='" + authorName + '\'' +
-                ", price=" + price + "$ " +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }

@@ -2,22 +2,17 @@ package homework6;
 
 import java.util.Scanner;
 
-public class Library {
+public class Library implements LibraryCommands {
 
     static Scanner scanner = new Scanner(System.in);
     static BookStorage bookStorage = new BookStorage();
 
-    private static final String EXIT = "0";
-    private static final String ADD_BOOK = "1";
-    private static final String PRINT_ALL_BOOKS = "2";
-    private static final String SEARCH_BOOK_BY_NAME = "3";
-    private static final String UPDATE_BOOK = "4";
-    private static final String DELETE_BOOK_BY_ID = "5";
-    private static final String FIND_BOOKS_IN_PRICE_RANGE = "6";
-
 
     public static void main(String[] args) {
 
+        bookStorage.add(new Book("Kikos", "a001", "Tumanyan", 35, 5));
+        bookStorage.add(new Book("Panos", "a002", "Tumanyan", 17, 4));
+        bookStorage.add(new Book("Ulik", "a003", "Tumanyan", 11, 6));
 
         boolean isRunning = true;
 
@@ -69,8 +64,9 @@ public class Library {
             System.out.println("Please input Book's price");
             //double price = scanner.nextDouble();   scanner.nextLine();
             double price = Double.parseDouble(scanner.nextLine());
-
-            Book book = new Book(title, id, authorName, price);
+            System.out.println("Please input Book's quantity");
+            int quantity = Integer.parseInt(scanner.nextLine());
+            Book book = new Book(title, id, authorName, price, quantity);
             bookStorage.add(book);
             System.out.println("Book added! ");
             System.out.println("Quantity of books: " + BookStorage.getTotalQuantity());
@@ -96,10 +92,13 @@ public class Library {
             String authorName = scanner.nextLine();
             System.out.println("Please input Book's price");
             double price = Double.parseDouble(scanner.nextLine());
+            System.out.println("Please input Book's quantity");
+            int quantity = Integer.parseInt(scanner.nextLine());
 
             bookById.setTitle(title);
             bookById.setAuthorName(authorName);
             bookById.setPrice(price);
+            bookById.setQuantity(quantity);
             System.out.println("Update was successfully");
             System.out.println("Quantity of books: " + BookStorage.getTotalQuantity());
         }
