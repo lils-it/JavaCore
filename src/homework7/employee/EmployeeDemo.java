@@ -3,21 +3,21 @@ package homework7.employee;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class EmployeeDemo implements EmployeeCommands{
+public class EmployeeDemo implements EmployeeCommands {
 
     static Scanner scanner = new Scanner(System.in);
     static EmployeeStorage employeeStorage = new EmployeeStorage();
 
     public static void main(String[] args) {
 
-        employeeStorage.add(new Employee("Kate" , "Kateson", "a001", 3700, "New Cola", "Accountant"));
-        employeeStorage.add(new Employee("Billy" , "Billson", "a002", 5670, "New Cola", "Manager"));
-        employeeStorage.add(new Employee("Koko" , "Jambo", "a003", 450, "Afri Cola", "Manager"));
+        employeeStorage.add(new Employee("Kate", "Kateson", "a001", 3700, "New Cola", "Accountant"));
+        employeeStorage.add(new Employee("Billy", "Billson", "a002", 5670, "New Cola", "Manager"));
+        employeeStorage.add(new Employee("Koko", "Jambo", "a003", 450, "Afri Cola", "Manager"));
 
         boolean isRunning = true;
 
         while (isRunning) {
-            printUserCommands();
+            EmployeeCommands.printUserCommands();
             String command = scanner.nextLine();
 
             switch (command) {
@@ -30,7 +30,7 @@ public class EmployeeDemo implements EmployeeCommands{
                 case PRINT_ALL_EMPLOYEES:
                     employeeStorage.print();
                     break;
-                case  SEARCH_EMPLOYEE_BY_EMPLOYEE_ID:
+                case SEARCH_EMPLOYEE_BY_EMPLOYEE_ID:
                     searchEmployeeByID();
                     break;
                 case SEARCH_EMPLOYEE_BY_EMPLOYEE_COMPANYNAME:
@@ -53,7 +53,7 @@ public class EmployeeDemo implements EmployeeCommands{
         Employee employee = employeeStorage.getEmployeeByID(id);
         if (employee == null) {
             System.out.println("No employee with id " + id + "was found ! ");
-        } else  System.out.println(employee);
+        } else System.out.println(employee);
     }
 
     private static void searchEmployeeByCompanyname() {
@@ -64,7 +64,7 @@ public class EmployeeDemo implements EmployeeCommands{
             System.out.println("No employees in the storage! ");
             return;
         }
-        Employee [] employeesSearched = employeeStorage.getEmployeesByCompanyName(keyword);
+        Employee[] employeesSearched = employeeStorage.getMultipleEmployeesByCompanyKeyword(keyword);
         if (employeesSearched.length == 0) {
             System.out.println("No company name with keyword " + keyword + " was found! ");
         } else {
@@ -86,28 +86,19 @@ public class EmployeeDemo implements EmployeeCommands{
             String companyname = getString("Company name");
             String position = getString("Employee position");
 
-            if (!name.isEmpty() && !surname.isEmpty() && !companyname.isEmpty()  && !salaryStr.isEmpty() && !position.isEmpty()) {
+            if (!name.isEmpty() && !surname.isEmpty() && !companyname.isEmpty() && !salaryStr.isEmpty() && !position.isEmpty()) {
                 double salary = Double.parseDouble(salaryStr);
                 Employee employee = new Employee(name, surname, id, salary, companyname, position);
                 employeeStorage.add(employee);
                 System.out.println("New Employee successfully added ! ");
             } else System.out.println("Please try again and input full data");
-        }
-        else System.out.println("An employee with id " + id + " already exists! ");
+        } else System.out.println("An employee with id " + id + " already exists! ");
     }
 
     private static String getString(String string) {
         System.out.println("Please input " + string);
         string = scanner.nextLine();
         return string;
-    }
-
-    private static void printUserCommands() {
-        System.out.println("Please input "+ EXIT + " to Exit");
-        System.out.println("Please input " + ADD_NEW_EMPLOYEE+ " to add employee");
-        System.out.println("Please input "  + PRINT_ALL_EMPLOYEES + " to print all employees");
-        System.out.println("Please input "+ SEARCH_EMPLOYEE_BY_EMPLOYEE_ID +  " to search an employee by ID");
-        System.out.println("Please input "+ SEARCH_EMPLOYEE_BY_EMPLOYEE_COMPANYNAME +  " to search an employee by Company name");
     }
 
 }
