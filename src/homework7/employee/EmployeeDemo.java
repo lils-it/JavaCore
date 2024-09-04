@@ -97,8 +97,7 @@ public class EmployeeDemo implements EmployeeCommands {
 
     private static String getString(String string) {
         System.out.println("Please input " + string);
-        string = scanner.nextLine();
-        return string;
+        return scanner.nextLine();
     }
 
 }

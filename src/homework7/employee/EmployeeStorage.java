@@ -49,7 +49,6 @@ public class EmployeeStorage {
         return Arrays.copyOf(searchedEmployees, index);
     }
 
-
     public void add(Employee employee) {
         if (employees.length == size) {
             extendStorage();
