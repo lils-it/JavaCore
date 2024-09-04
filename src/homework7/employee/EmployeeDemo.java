@@ -1,6 +1,5 @@
 package homework7.employee;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class EmployeeDemo implements EmployeeCommands {
