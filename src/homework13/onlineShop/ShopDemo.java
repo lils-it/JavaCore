@@ -11,6 +11,7 @@ import homework13.onlineShop.user.TypeUser;
 import homework13.onlineShop.user.User;
 import homework13.onlineShop.user.UserStorage;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -212,11 +213,19 @@ public class ShopDemo {
         System.out.println("Please choose the payment method / CARD, CASH, PAYPAL");
         PaymentMethod payMethod = PaymentMethod.valueOf(scanner.nextLine().toUpperCase());
         double price = product.getPrice() * qty;
-
-        currentOrder = new Order(id.concat("00"+qty), currentUser, product, date, price, OrderStatus.NEW, qty, payMethod);
-        orderStorage.add(currentOrder);
-        System.out.println("Order placed/bought successfully!\n");
-        product.setStockQty(product.getStockQty() - qty); // stock update after buying product
+        System.out.println("Product chose: " + product.getName() + "\nOrder's total price: " + price);
+        System.out.println("Do you want to buy the placed order ? / YES , NO ");
+        String yesOrNo = scanner.nextLine();
+        if (yesOrNo.equalsIgnoreCase("YES")){
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHH.mmss"); // Date format: year, month, day, hour, minute, second
+            String formatDate = dateFormat.format(date);
+            currentOrder = new Order(id.concat("."+formatDate), currentUser, product, date, price, OrderStatus.NEW, qty, payMethod);
+            orderStorage.add(currentOrder);
+            System.out.println("Processing successful! You bought the product!\n");
+            product.setStockQty(product.getStockQty() - qty); // stock update after buying product
+        } else {
+            System.out.println("Order canceled! Please try to buy products again");
+        }
     }
 
     private static void adminProcess() {
@@ -267,7 +276,9 @@ public class ShopDemo {
                     System.out.println("Please give the ID of the order you want to check the status for: ");
                     String orderId = scanner.nextLine();
                     Order order = orderStorage.getById(orderId);
-                    System.out.println("Current order status: " + order.getOrderStatus());
+                    if (order != null) {
+                        System.out.println("Current order status: " + order.getOrderStatus());
+                    } else System.out.println("No order with this id " + orderId+ " was found!" );
                     break;
                 case AdminCommands.CHANGE_ORDER_STATUS:
                     orderStorage.printAll();
@@ -276,11 +287,13 @@ public class ShopDemo {
                     Order order2 = orderStorage.getById(orderId2);
                     Product product2 = productStorage.getProductByID(orderStorage.getProductIdByOrderId(orderId2));
                     changeOrderStatus(order2, orderId2);
+
                     if (order2.getOrderStatus().equals(OrderStatus.CANCELED) && product2 != null) {
                         product2.setStockQty(product2.getStockQty() + order2.getQty());
+                        orderStorage.remove(order2);
+                        System.out.println("Order canceled and removed from the storage.");
                     }
                     break;
-
             }
         }
     }
