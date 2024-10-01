@@ -1,9 +1,11 @@
 package homework7.employee;
 
 
+import homework13.onlineShop.Storage;
+
 import java.util.Arrays;
 
-public class EmployeeStorage {
+public class EmployeeStorage  {
 
     private Employee[] employees = new Employee[10];
     private int size;
